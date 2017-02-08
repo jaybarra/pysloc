@@ -21,7 +21,7 @@ def get_source_files(entry = "./", extensions = [".js", ".jsx", ".py", ".h", ".h
     return source_files
 
 def file_len(f):
-    """Returns the file length of the file"""
+    """Returns the line count of the file"""
     f.replace("\\", "/")
     with open(f) as src:
         try:
@@ -34,10 +34,10 @@ def file_len(f):
 def main():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("-d", "--directory", default="./")
+    parser.add_argument('target', nargs='?', default=os.getcwd())
     args = parser.parse_args()
 
-    source_files = get_source_files(args.directory);
+    source_files = get_source_files(args.target);
 
     total_sloc = 0
     for f in source_files:
